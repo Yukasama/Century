@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  p,
+  i,
+  h1,
+  h2,
+  h3,
+  li,
+  label {
+    @apply text-moon-900 dark:text-sun-100;
+  }
+  input, select {
+    @apply outline-none;
+  }
+}
