@@ -2,13 +2,16 @@
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
+import { useRouter } from "next/navigation";
 import ThemeToggler from "./ThemeToggler";
 
 export default function Header() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const input = inputRef.current?.value;
     if (!input) return;
     else {
@@ -16,7 +19,18 @@ export default function Header() {
     }
 
     try {
-    } catch {}
+      const response = await fetch("/activeScraper", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ search: input }),
+      });
+
+      const { collection_id, start_eta } = await response.json();
+
+      router.push(`/search/${collection_id}`);
+    } catch (error) {}
   };
 
   return (
