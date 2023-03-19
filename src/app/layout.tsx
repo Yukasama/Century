@@ -17,11 +17,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Provider>
-          <div className="flex bg-sun-300 dark:bg-moon-300 h-screen">
+          <div className="flex bg-sun-300 dark:bg-moon-300 h-screen overflow-hidden">
             <Sidebar />
-            <main className="p-10 max-w-7xl w-full mx-auto overflow-y-auto">
+            <main className="w-full">
               <Header />
-              {children}
+              <div className="overflow-y-auto p-5 h-full w-full">{children}</div>
             </main>
           </div>
         </Provider>

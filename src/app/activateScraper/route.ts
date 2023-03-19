@@ -30,13 +30,12 @@ export async function POST(req: NextRequest) {
       createdAt: start_eta,
     });
 
-    NextResponse.json({
+    return NextResponse.json({
       collection_id,
       start_eta,
     });
   } catch (err: any) {
-    console.log("Error: " + err.message);
-    NextResponse.json({
+    return NextResponse.json({
       error: err.message,
     });
   }

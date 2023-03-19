@@ -19,10 +19,10 @@ export default function ThemeToggler() {
   return (
     <div
       onClick={() => (theme === "light" ? setTheme("dark") : setTheme("light"))}
-      className="rounded-lg hover:bg-sun-300 h-9 w-9 flex justify-center items-center 
+      className="rounded-lg hover:bg-sun-400 h-9 w-9 flex justify-center items-center 
       dark:hover:bg-moon-100 transition-none cursor-pointer">
       {theme === "dark" ? (
-        <SunIcon className="text h-6 w-6" />
+        <SunIcon className="text h-7 w-7" />
       ) : (
         <MoonIcon className="text h-6 w-6" />
       )}
