@@ -1,16 +1,18 @@
 import * as functions from "firebase-functions";
 import { adminDb } from "../../firebaseAdmin";
-import * as admin from "firebase-admin";
 
 const fetchResults: any = async (id: string) => {
   const apiKey = process.env.BRIGHTDATA_API_KEY;
 
-  const res = await fetch(`https://api.brightdata.com/dca/dataset?id=${id}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-    },
-  });
+  const res = await fetch(
+    `https://api.brightdata.com/dca/dataset?id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    }
+  );
 
   const data = await res.json();
 
@@ -24,24 +26,24 @@ const fetchResults: any = async (id: string) => {
 
 export const onScraperComplete = functions.https.onRequest(
   async (request, response) => {
-    const { success, id } = request.body;
+    const { success, id, finished } = request.body;
 
     if (!success) {
       await adminDb.collection("searches").doc(id).set(
         {
           status: "error",
-          updatedAt: admin.firestore.Timestamp.now(),
+          updatedAt: finished,
         },
         { merge: true }
       );
     }
 
-    const data = await fetchResults();
+    const data = await fetchResults(id);
 
     await adminDb.collection("searches").doc(id).set(
       {
         status: "complete",
-        updatedAt: admin.firestore.Timestamp.now(),
+        updatedAt: finished,
         results: data,
       },
       { merge: true }
@@ -51,5 +53,3 @@ export const onScraperComplete = functions.https.onRequest(
     response.send("Scraping Function complete.");
   }
 );
-
-//NGROK URL: https://f910-134-19-93-253.eu.ngrok.io/century-daaf0/us-central1/onScraperComplete

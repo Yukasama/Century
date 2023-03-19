@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminDb } from "../../../firebaseAdmin";
-import admin from "firebase-admin";
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,7 +27,7 @@ export async function POST(req: NextRequest) {
       search,
       start_eta,
       status: "pending",
-      createdAt: admin.firestore.Timestamp.now(),
+      createdAt: start_eta,
     });
 
     NextResponse.json({

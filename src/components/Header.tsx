@@ -19,7 +19,7 @@ export default function Header() {
     }
 
     try {
-      const response = await fetch("/activeScraper", {
+      const response = await fetch("/activateScraper", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
