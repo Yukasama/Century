@@ -10,8 +10,10 @@ export default function Results({ results }: Props) {
       {results.map((result) => (
         <Link
           href={result.url}
+          target="_blank"
           className="flex flex-col space-x-5 w-full bg-sun-200 
-          dark:bg-moon-400 rounded-xl shadow-md p-5">
+          dark:bg-moon-400 rounded-xl shadow-md p-5 hover:scale-[1.02] 
+          duration-300 transition-transform">
           <img
             className="object-contain w-full h-60 xl:h-48 py-5"
             srcSet={result.imageset}

@@ -37,7 +37,7 @@ export default function SidebarRow({ doc }: Props) {
 
       <span className="mx-2">
         {doc.data().status === "pending" ? (
-          <Spinner name="cube-grid" fadeIn="none" color="indigo" />
+          <Spinner name="cube-grid" fadeIn="none" color="#6870fa" />
         ) : (
           <CheckCircleIcon className="h-6 w-6 text-green-500" />
         )}

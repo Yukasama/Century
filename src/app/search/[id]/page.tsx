@@ -7,6 +7,7 @@ import Results from "../../../components/Results";
 import NotFound from "../../../components/NotFound";
 import Spinner from "react-spinkit";
 import { useRouter } from "next/navigation";
+import Loading from "../../../components/Loading";
 
 export default function Search({ params: { id } }: { params: { id: string } }) {
   const [snapshot, loading, error] = useDocument(doc(db, "searches", id));
@@ -19,13 +20,14 @@ export default function Search({ params: { id } }: { params: { id: string } }) {
 
   const deleteButton = (
     <button
-      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sun-100 font-semibold"
+      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg 
+      text-sun-100 font-semibold"
       onClick={handleDelete}>
       Delete
     </button>
   );
 
-  if (loading) return <div>loading</div>;
+  if (loading) return <Loading />;
 
   if (!snapshot?.exists()) return <NotFound />;
 
@@ -42,7 +44,7 @@ export default function Search({ params: { id } }: { params: { id: string } }) {
           }}
           name="cube-grid"
           fadeIn="none"
-          color="indigo"
+          color="#6870fa"
         />
         {deleteButton}
       </div>
